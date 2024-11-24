@@ -1,0 +1,25 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    page not found (404)
+{% endblock title %}
+
+{% block icon %}
+    {{ url_for('static', filename = 'icons/belt_safety_icon.ico') }}
+{% endblock icon %}
+
+
+{% block header %}
+    <div class="error_header">
+        <h1 class="header_title">page not found (404)</h1>
+    </div>
+{% endblock header %}
+
+
+{% block content %}
+    <div class="my_background_box form_box">
+        <p class="error_main">Oops...🦖<br>Could't find the page you are looking for<br>Please try again</p>
+        <br>
+        <a class="back_button" href="{{ url_for('home_view.home') }}">🍋 Back 🍋</a>
+    </div>
+{% endblock content %}

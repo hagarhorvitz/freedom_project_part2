@@ -1,0 +1,33 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    vacation
+{% endblock title %}
+
+
+{% block icon %}
+    {{ url_for('static', filename = 'icons/map_icon.ico') }}
+{% endblock icon %}
+
+
+{% block header %}
+    <div class="vacation_info_header">
+        <p>{{ vacation.country_name }}</p>
+    </div>
+{% endblock header %}
+
+
+
+{% block content %}
+    <div class="vacation_info my_background_box form_box">
+            <img src="{{ url_for('vacations_view.get_image', image_name = vacation.image_name if vacation.image_name else '---') }}">
+            <p>{{ vacation.start_date|format_date }}&nbsp-&nbsp{{ vacation.end_date|format_date }}<br>
+            {{ vacation.description }}<br>
+            ₪ {{ vacation.price }}</p>
+            <span>Back to:</span>
+            <a href="{{ url_for('vacations_view.all_vacations') }}">vacations page</a>
+            <a href="{{ url_for('home_view.home') }}">home page</a>
+    </div>
+{% endblock content %}
+
+

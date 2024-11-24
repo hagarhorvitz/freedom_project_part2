@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %} {% endblock title %}</title>
+
+    <link rel="stylesheet" href="{{ url_for('static', filename = 'css/style.css') }}">
+    <link rel="icon" type="image/x-icon" href="{% block icon %} {% endblock icon %}">
+
+</head>
+<body>
+    {% set user = session.get("current_user") %}
+    <div class="layout">
+        <header class="my_background_box" id="main_header">
+            <img src="{{ url_for('static', filename = 'logos/freedom_new_logo.png') }}" id="web_logo">
+            
+            {% include "auth_hello_users.html" %}
+            
+            {% block header %}
+            {% endblock header %} 
+
+            {% if error %} <span class="error">{{ error }}</span> {% endif %}
+            {% if clicked %} <span class="clicked">{{ clicked }}</span> {% endif %}
+            {% if admin_action %} <span class="admin_action">{{ admin_action }}</span> {% endif %}
+        </header>
+        <nav>
+            <a href="{{ url_for('home_view.home') }}" {% if active == "home" %} class="active" {% endif %}>Home</a>
+            <span>|</span>
+            <a href="{{ url_for('vacations_view.all_vacations') }}" {% if active == "vacations" %} class="active" {% endif %}>Our Vacations</a>
+            <span>|</span>
+            <a href="{{ url_for('contact_view.contact_us') }}" {% if active == "contact" %} class="active" {% endif %}>Contact us</a>
+        </nav>
+        <main> 
+            {% block content %}
+            {% endblock content %}
+        </main>
+    </div>
+    <script src="{{ url_for('static', filename = 'js/main.js') }}"></script>
+</body>
+</html>

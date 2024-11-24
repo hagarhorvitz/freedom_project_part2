@@ -1,0 +1,50 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    new vacation
+{% endblock title %}
+
+{% block icon %}
+    {{ url_for('static', filename = 'icons/hot_air_balloon_icon.ico') }}
+{% endblock icon %}
+
+
+{% block header %}
+<div class="new_update_header">
+    <h1 class="header_title">add new vacation</h1>
+</div>
+{% endblock header %}
+
+
+{% block content %}
+    <form method="post" enctype="multipart/form-data" class="new_update_vacation_form my_background_box form_box">
+        <label>select country</label>
+        <select name="country_id" required>
+            <option value="None" selected disabled>Select country</option>
+            {% for country in countries %}
+                <option value="{{ country.country_id }}" >{{ country.country_name }}</option>
+            {% endfor %}
+        </select>
+
+        <div class="form_small_link">
+            Can't find the destination country?&nbsp
+            <a href="{{ url_for('countries_view.new_country') }}">Add new country here</a>
+        </div>
+
+        <label>starts on</label>
+        <input type="date" name="start_date" value="{{ vacation.start_date }}" required>
+        <label>ends on</label>
+        <input type="date" name="end_date" value="{{ vacation.end_date }}" required>
+        <label>description</label>
+        <textarea name="description" value="{{ vacation.description }}" minlength="5" maxlength="250" rows="5" required>{{ vacation.description }}</textarea>
+        <label>price</label>
+        <input type="number" name="price" value="{{ vacation.price }}" placeholder="₪" step="1" min="0" max="10000" required>
+        <label>cover image</label>
+        <label for="select_image" class="select_new_image_label">select image</label>
+        <input type="file" name="image" accept="image/*" id="select_image">
+        <div id="show_file_name" class="file_name_in_form"></div>
+        <br>
+        <button class="form_button">add vacation</button>
+        <a class="cancel_button" href="{{ url_for('vacations_view.all_vacations') }}">cancel</a>
+    </form>
+{% endblock content %}

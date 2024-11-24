@@ -1,0 +1,39 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    register
+{% endblock title %}
+
+
+{% block icon %}
+    {{ url_for('static', filename = 'icons/passport_icon.ico') }}
+{% endblock icon %}
+
+
+{% block header %}
+<div class="login_register_header">
+    <h1 class="header_title">Register to our exclusive members program and let the fun begin!</h1>
+</div>
+{% endblock header %}
+
+
+
+{% block content %}
+<form method="post" class="register_login_form my_background_box form_box">
+    <label>first name</label>
+    <input type="text" name="first_name" value="{{ new_user.first_name }}" minlength="2" maxlength="45" required>
+    <label>last name</label>
+    <input type="text" name="last_name" value="{{ new_user.last_name }}" minlength="2" maxlength="45" required>
+    <label>email</label>
+    <input type="email" name="email" value="{{ new_user.email }}" minlength="5" maxlength="60" required>
+    <label>password</label>
+    <input type="password" name="password" value="{{ new_user.password }}" minlength="4" maxlength="20" required>
+    <br>
+    <button class="form_button" id="register">register</button>
+
+    <div class="form_small_link">
+        Already a member?&nbsp
+        <a href="{{ url_for('users_view.login') }}">Login</a>
+    </div>
+</form>
+{% endblock content %}

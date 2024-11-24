@@ -1,0 +1,15 @@
+<div class="hello_user">
+    {% if user %}
+        <span>hello {{ user["first_name"] }} {{ user["last_name"] }}</span>
+        <span>|</span>
+        <a href="{{ url_for('users_view.logout') }}" id="logout">logout</a>
+    {% else %}
+        <span>hello guest</span>
+        <span>|</span>
+        <a href="{{ url_for('users_view.login') }}" {% if active == "login" %} class="active" {% endif %}>Login</a>
+        <span>|</span>
+        <a href="{{ url_for('users_view.register') }}" {% if active == "register" %} class="active" {% endif %}>Register</a>
+    {% endif %}
+</div>
+
+

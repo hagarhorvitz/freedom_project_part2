@@ -1,0 +1,41 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    home
+{% endblock title %}
+
+
+{% block icon %}
+    {{ url_for('static', filename = 'icons/bird_relaxing_icon.ico') }}
+{% endblock icon %}
+
+
+
+{% block header %}
+<div class="home_header">
+    <h1 class="header_title"><span class="capital_letter">F</span>reedom . <span class="capital_letter">L</span>uxury . <span class="capital_letter">V</span>acations .</h1>
+</div>
+{% endblock header %}
+
+
+{% block content %}
+    <div class="my_background_box home_main" >
+        <h1 class="home_main_title">🍋 Find the perfect vacation with us 🍋</h1>
+        {% if user %}
+
+            <div class="home_gallery">
+                {% for image in images %}
+                <a href="{{ url_for('vacations_view.one_vacation', id = id_list[random_index] ) }}"><img src="{{ url_for('home_view.get_home_image', image_name = image) }}" alt="{{ image }}"></a>
+                {% endfor %}
+            </div>
+            <p class="home_secret_paragraph">Secret game for member only!<br>
+                Click on any image you like and get the details for a random vacation</p>
+        {% else %}
+            <div class="home_gallery" id="gallery_container">
+
+            </div>
+        {% endif %}
+    </div> 
+{% endblock content %}
+
+<!-- <a href="{{ url_for('vacations_view.all_vacations') }}"><img src="{{ url_for('home_view.get_home_image', image_name = image) }}" alt="{{ image }}"></a> -->

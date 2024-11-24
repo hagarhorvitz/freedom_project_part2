@@ -1,0 +1,60 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    update vacation
+{% endblock title %}
+
+
+{% block icon %}
+    {{ url_for('static', filename = 'icons/chair_icon.ico') }}
+{% endblock icon %}
+
+
+{% block header %}
+<div class="new_update_header">
+    <h1 class="header_title">update vacation id: {{ vacation.vacation_id }}</h1>
+</div>
+{% endblock header %}
+
+
+{% block content %}
+    <form method="post" enctype="multipart/form-data" class="new_update_vacation_form my_background_box form_box">
+        <label>
+            select country
+            <br>
+            <span id="select_country_if_changed">📍only if destination changed📍</span>
+        </label>
+        <select name="country_id" required>
+            <option value="{{ vacation.country_id }}" selected>{{ vacation.country_name }}</option>
+            {% for country in countries %}
+                <option value="{{ country.country_id }}">{{ country.country_name }}</option>
+            {% endfor %}
+        </select>
+
+        <div class="form_small_link" >
+            Can't find the destination country?&nbsp
+            <a href="{{ url_for('countries_view.new_country') }}">Add new country here</a>
+        </div>
+
+        <label>starts on</label>
+        <input type="date" name="start_date" value="{{ vacation.start_date }}" required>
+        <label>ends on</label>
+        <input type="date" name="end_date" value="{{ vacation.end_date }}" required>
+        <label>description</label>
+        <textarea name="description" value="{{ vacation.description }}" minlength="5" maxlength="250" rows="5" required>{{ vacation.description }}</textarea>
+        <label>price</label>
+        <input type="number" name="price" value="{{ vacation.price }}" step="1" min="0" max="10000" required>
+        
+        <label>cover image</label>
+        <div class="select_image_in_update_form">
+            <img src="{{ url_for('vacations_view.get_image', image_name = vacation.image_name if vacation.image_name else '---') }}">
+            <label for="select_image" class="update_image_label">select image</label>
+            <input type="file" name="image" accept="image/*" id="select_image">
+        </div>
+        <div id="show_file_name" class="file_name_in_form"></div> 
+
+        <button class="form_button" style="margin-top: 5px;">update vacation</button>
+        <a class="cancel_button" href="{{ url_for('vacations_view.all_vacations') }}">cancel</a>
+    </form>
+    
+{% endblock content %}

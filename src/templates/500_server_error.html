@@ -1,0 +1,26 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    server error (500)
+{% endblock title %}
+
+{% block icon %}
+    {{ url_for('static', filename = 'icons/belt_safety_icon.ico') }}
+{% endblock icon %}
+
+
+
+{% block header %}
+    <div class="error_header">
+        <h1 class="header_title">server error (500)</h1>
+    </div>
+{% endblock header %}
+
+
+{% block content %}
+    <div>
+        <p class="error_main">Oops...🦖<br>We have some technical issues with the server<br>Please try again later</p>
+        <br>
+        <a class="back_button" href="{{ url_for('home_view.home') }}">🍋 Back🍋</a>
+    </div>
+{% endblock content %}

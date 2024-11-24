@@ -1,0 +1,61 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    all vacations
+{% endblock title %}
+
+
+{% block icon %}
+    {{ url_for('static', filename = 'icons/airplane_earth_trave_icon.ico') }}
+{% endblock icon %}
+
+
+{% block header %}
+    <div class="vacations_header">
+        <h1 class="header_title" style="font-size: 70px;">Our luxury vacations</h1>
+        {% if user.role_id == admin_id %}
+            <a href="{{ url_for('vacations_view.new_vacation') }}" class="admin_add_new_vacation" >add new vacation</a>
+        {% endif %}
+    </div>
+{% endblock header %}
+
+
+{% block content %}
+    <div class="vacations_gallery">
+        {% for vacation in vacations %}
+            
+            <div class="gallery_cards" id="card_{{ vacation.vacation_id }}">
+            <form method="post" class="like_vacation_form" id="form_{{ vacation.vacation_id }}"></form>
+                <img class="vacation_card_image" src="{{ url_for('vacations_view.get_image', image_name = vacation.image_name if vacation.image_name else '---') }}">
+
+                <img class="likes_heart" alt="heart" id="image_{{ vacation.vacation_id }}" src="{{ url_for('static', filename = 'logos/red_hearts.png' if vacation.vacation_id in user_likes_vacations else 'logos/white_hearts.png') }}"> 
+
+                <p class="number_of_likes" id="likes_{{ vacation.vacation_id }}">{{ vacation.count_likes }}</p>
+
+                <p class="country_name">{{ vacation.country_name }}</p>
+                <p class="start_date">{{ vacation.start_date|format_date }}</p>
+                <p class="end_date">{{ vacation.end_date|format_date }}</p>
+                <p class="price">₪ {{ vacation.price }}</p>
+                <p class="description">{{ vacation.description }}</p>
+                
+                <br>
+                {% if user.role_id != admin_id %}
+                    <div class="like_vacation">
+                        <input type="hidden" name="user_id" value="{{ user.user_id }}">
+                        <input type="hidden" name="vacation_id" value="{{ vacation.vacation_id }}">
+                        <button onclick="handleLikeOrUnlike(this, '{{ user.user_id }}', '{{ vacation.vacation_id }}')">{{ 'unlike' if vacation.vacation_id in user_likes_vacations else 'like' }}</button>
+                    </div>
+                {% else %}
+                    <div class="edit_and_delete">
+                        <a href="{{ url_for('vacations_view.update_vacation', id = vacation.vacation_id) }}" >edit</a>
+                        <span>|</span>
+                        <a onclick="confirmDeleteVacation('{{ vacation.vacation_id }}')" href="{{ url_for('vacations_view.delete_vacation', id = vacation.vacation_id) }}" >delete</a>  
+                    </div>
+                {% endif %}
+            
+            </form>
+            </div>
+        {% endfor %}
+    </div>
+{% endblock content %}
+

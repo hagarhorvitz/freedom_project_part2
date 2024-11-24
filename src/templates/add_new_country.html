@@ -1,0 +1,28 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    new country
+{% endblock title %}
+
+{% block icon %}
+    {{ url_for('static', filename = 'icons/new_icon.ico') }}
+{% endblock icon %}
+
+
+{% block header %}
+<div class="new_update_header">
+    <h1 class="header_title">add new country</h1>
+</div>
+{% endblock header %}
+
+
+{% block content %}
+    <form method="post" class="new_country_form my_background_box form_box">
+        <label>country name</label>
+        <input type="text" name="country_name" value="{{ country.country_name }}" minlength="2" maxlength="100" required>
+        <br>
+        <button class="form_button">add country</button>
+        <a class="cancel_button" href="{{ url_for('vacations_view.all_vacations') }}">cancel</a>
+    </form>
+    <br>
+{% endblock content %}

@@ -1,0 +1,68 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    contact us
+{% endblock title %}
+
+
+{% block icon %}
+    {{ url_for('static', filename = 'icons/customer_service_icon.ico') }}
+{% endblock icon %}
+
+
+{% block header %}
+    <div class="contact_header_info">
+        <div>
+            <p><span >office hours</span><br>
+            sunday - thursday<br>08:30 - 17:30
+            <br>
+            friday<br>08:30 - 12:30</p>
+            <p><span>address</span><br>
+            123 st tel aviv</p>
+        </div>
+        <div>
+            <p><span>phone number</span><br>
+            +97250-555-5555</p>
+            <p><span>support emails</span><br>
+            customerservice@gmail.com<br>
+            support@gmail.com</p>
+        </div>
+        <div>
+            <p><span>find us on social media</span></p>
+            <p><a href="#"><img src="{{ url_for('contact_view.get_logo_image', logo_image_name = 'instagram_logo.png') }}"></a>&nbsp
+                &nbsp<a href="#"><img src="{{ url_for('contact_view.get_logo_image', logo_image_name = 'facebook_logo.png') }}"></a></p>
+        </div>
+    </div>
+{% endblock header %}
+
+
+<!-- action = where to send to form-data -->
+
+{% block content %}
+    <div class="contact_us">
+        <h1>🍋 message us 🍋</h1>
+        <form method="get" action="{{ url_for('contact_view.contact_target') }}" class="contact_form my_background_box form_box">
+            <label>first name</label>
+            <input type="text" name="first_name" value="{{ user.first_name if user else '' }}" minlength="2" maxlength="45" required>
+            <label>last name</label>
+            <input type="text" name="last_name" value="{{ user.last_name if user else '' }}" minlength="2" maxlength="45" required>
+            <label>email</label>
+            <input type="email" name="email" value="{{ user.email if user else '' }}" minlength="5" maxlength="60" required>
+            <label>phone number</label>
+            <input type="text" name="phone_number" minlength="9" maxlength="20" required>
+            <label>choose subject</label>
+            <select name="subject" required>
+                <option value="None" selected disabled>Select</option>
+                <option value="Booking">Booking & Trips</option>
+                <option value="Membership">Membership & Loyalty programme</option>
+                <option value="Cancellations">Cancellations</option>
+                <option value="Other">Other</option>    
+            </select>
+            <label>your message</label>
+            <textarea name="massage" rows="5" required></textarea>
+            <br>
+            <button class="form_button">send</button>
+            <a class="cancel_button" href="{{ url_for('home_view.home') }}">cancel</a>
+        </form>
+    </div>
+{% endblock content %}

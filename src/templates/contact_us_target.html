@@ -1,0 +1,46 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    contact us
+{% endblock title %}
+
+
+{% block icon %}
+    {{ url_for('static', filename = 'icons/customer_service_icon.ico') }}
+{% endblock icon %}
+
+
+{% block header %}
+    <div class="contact_header_info">
+        <div>
+            <p><span >office hours</span><br>
+            sunday - thursday<br>08:30 - 17:30
+            <br>
+            friday<br>08:30 - 12:30</p>
+            <p><span>address</span><br>
+            123 st tel aviv</p>
+        </div>
+        <div>
+            <p><span>phone number</span><br>
+            +97250-555-5555</p>
+            <p><span>support emails</span><br>
+            customerservice@gmail.com<br>
+            support@gmail.com</p>
+        </div>
+        <div>
+            <p><span>find us on social media</span></p>
+            <p><a href="#"><img src="{{ url_for('contact_view.get_logo_image', logo_image_name = 'instagram_logo.png') }}"></a>&nbsp
+                &nbsp<a href="#"><img src="{{ url_for('contact_view.get_logo_image', logo_image_name = 'facebook_logo.png') }}"></a></p>
+        </div>
+    </div>
+{% endblock header %}
+
+
+
+{% block content %}
+    <div class="contact_form_target my_background_box form_box">
+        <span id="target_line1">We received your message!
+            <br>🍋🍋🍋</span><br>
+        <span id="target_line2">One of us will contact you soon<br>(up to 2 business days)</span>
+    </div>
+{% endblock content %}
